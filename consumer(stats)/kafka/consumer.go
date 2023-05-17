@@ -17,6 +17,8 @@ var (
 func StartConsumer() {
 	config := sarama.NewConfig()
 
+	fmt.Println("HELLO KAFKA")
+
 	client, err := sarama.NewClient(kafkaBrokers, config)
 	if err != nil {
 		panic(err)

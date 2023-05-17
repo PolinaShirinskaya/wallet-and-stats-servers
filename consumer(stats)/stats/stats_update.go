@@ -70,7 +70,7 @@ func WithdrawingUpdate(event WalletWithdrawnEvent) {
 	}
 
 	deposit := decimal.NewFromFloat(ResultStats.Wallet.Withdrawn)
-	sum := deposit.Sub(amount)
+	sum := deposit.Add(amount)
 
 	ResultStats.Wallet.Withdrawn, _ = sum.Float64()
 }

@@ -11,9 +11,9 @@ func DetermineEventType(key []byte) string {
 	case "Wallet_Deposited":
 		return "Wallet_Deposited"
 	case "Wallet_Withdrawn":
-		return "Wallet_Deposited"
+		return "Wallet_Withdrawn"
 	case "Wallet_Transfered":
-		return "Wallet_Deposited"
+		return "Wallet_Transfered"
 	default:
 		return "Unknown"
 	}

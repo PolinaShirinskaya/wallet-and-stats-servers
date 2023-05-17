@@ -5,7 +5,7 @@ set -e
 #set -x flag for debugging
 set -o pipefail
 
-SERVERPORT=5300
+SERVERPORT=5200
 SERVERADDR=localhost:${SERVERPORT}
 
 if [ -z "$1" ]

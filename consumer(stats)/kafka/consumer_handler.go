@@ -55,15 +55,15 @@ func (h ConsumerGroupHandler) ConsumeClaim(sess sarama.ConsumerGroupSession, cla
 			stats.DepositingUpdate(depositedEvent)
 			log.Printf("Handling Wallet_Deposited event: %+v\n", depositedEvent)
 
-		case "Wallet_Withdraw":
+		case "Wallet_Withdrawn":
 			var wihdrawnEvent stats.WalletWithdrawnEvent
 			err := json.Unmarshal(message.Value, &wihdrawnEvent)
 			if err != nil {
-				log.Printf("Error deserializing Wallet_Deposited event: %s\n", err.Error())
+				log.Printf("Error deserializing Wallet_Withdrawn event: %s\n", err.Error())
 				continue
 			}
 			stats.WithdrawingUpdate(wihdrawnEvent)
-			log.Printf("Handling Wallet_Deposited event: %+v\n", wihdrawnEvent)
+			log.Printf("Handling Wallet_Wihtdarwn event: %+v\n", wihdrawnEvent)
 
 		case "Wallet_Transfered":
 			var transferesEvent stats.WalletTransferedEvent

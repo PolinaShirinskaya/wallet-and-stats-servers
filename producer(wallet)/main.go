@@ -73,7 +73,6 @@ func (ws *walletServer) walletHandler(w http.ResponseWriter, req *http.Request) 
 		if len(pathParams) < 2 {
 			http.Error(w, "expect /wallets/{id} in wallet handler", http.StatusBadRequest)
 			w.WriteHeader(http.StatusBadRequest)
-			return
 		}
 		id := pathParams[1]
 
