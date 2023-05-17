@@ -18,12 +18,20 @@
 docker-compose up -d
 ```
 **Для запуска проекта нам потребуется 4 окна терминала:**
-1. Для запуска сервера `wallet` (producer Kafka)
+
+**1. Для запуска сервера `wallet` (producer Kafka)**
 ```
 //в каталоге wallet_producer
 $>go run main.go
 ```
-2. Для отправки HTTP-запросов на сервер `wallet` с помощью скрипта [request.sh](https://github.com/PolinaShirinskaya/wallet-and-stats-servers/blob/main/wallet_producer/requests.sh)
+
+**2. Для запуска сервера `stats` (consumer Kafka)**
+```
+//в каталоге stats_consumer
+go run main.go
+```
+
+**3. Для отправки HTTP-запросов на сервер `wallet` с помощью скрипта [request.sh](https://github.com/PolinaShirinskaya/wallet-and-stats-servers/blob/main/wallet_producer/requests.sh)**
 
 При запуске скрипта Вы можете получить список возможных команд:
 ```
@@ -46,12 +54,8 @@ Please enter the command:
 ```
 bash request.sh "POST"
 ```
-3. Для запуска сервера `stats` (consumer Kafka)
-```
-//в каталоге stats_consumer
-go run main.go
-```
-4. Для отправки GET запроса на сервер `stats` с помощью скрипта [request.sh](https://github.com/PolinaShirinskaya/wallet-and-stats-servers/blob/main/stats_consumer/requests.sh)
+
+**4. Для отправки GET запроса на сервер `stats` с помощью скрипта [request.sh](https://github.com/PolinaShirinskaya/wallet-and-stats-servers/blob/main/stats_consumer/requests.sh)**
 ```
 bash request.sh "GET"
 ```
