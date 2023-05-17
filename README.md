@@ -59,3 +59,7 @@ bash request.sh "POST"
 ```
 bash request.sh "GET"
 ```
+---
+---
+## Как это будет выглядеть
+![This is a alt text.](/images/working_servers.png "This is workin servers.")
