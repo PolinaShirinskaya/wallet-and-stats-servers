@@ -12,11 +12,12 @@ import (
 var (
 	KafkaBrokers = []string{"localhost:9093"}
 	KafkaTopics = "wallet_operations"
-	enqueued int	
+	enqueued int
 )
 
 func PublishEvent(event interface{}) {
 
+	println("Publish event function")
 	producer, err := setupProducer()
 	if err != nil {
 		panic(err)

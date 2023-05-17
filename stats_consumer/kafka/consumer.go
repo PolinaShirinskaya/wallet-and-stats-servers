@@ -8,6 +8,7 @@ import (
 	"github.com/Shopify/sarama"
 )
 
+
 var (
 	kafkaBrokers = []string{"localhost:9093"}
 	kafkaTopics = []string{"wallet_operations"}
@@ -16,8 +17,6 @@ var (
 
 func StartConsumer() {
 	config := sarama.NewConfig()
-
-	fmt.Println("HELLO KAFKA")
 
 	client, err := sarama.NewClient(kafkaBrokers, config)
 	if err != nil {

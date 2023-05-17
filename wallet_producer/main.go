@@ -15,6 +15,24 @@ import (
 	"example.com/internal/kafka"
 )
 
+func main() {
+	mux := http.NewServeMux()
+	server := NewWalletServer()
+	mux.HandleFunc("/wallets/", server.walletHandler)
+
+	signals := make(chan os.Signal, 1)
+	signal.Notify(signals, os.Interrupt)
+
+	go func() {
+		<-signals
+		log.Println("Received interrupt signal. Shutting down...")
+		os.Exit(0)
+	}()
+
+	log.Fatal(http.ListenAndServe(":5100", mux))
+	
+}
+
 type walletServer struct {
 	store *walletstore.WalletStore
 }
@@ -361,23 +379,4 @@ func (ws *walletServer) transferWalletHandler(w http.ResponseWriter, req *http.R
 
 	t := time.Since(start)
 	log.Printf("handling transfer wallet at %s (request processing time: %d microseconds)\n", req.URL.Path, t.Microseconds())
-}
-
-
-func main() {
-	mux := http.NewServeMux()
-	server := NewWalletServer()
-	mux.HandleFunc("/wallets/", server.walletHandler)
-
-	signals := make(chan os.Signal, 1)
-	signal.Notify(signals, os.Interrupt)
-
-	go func() {
-		<-signals
-		log.Println("Received interrupt signal. Shutting down...")
-		os.Exit(0)
-	}()
-
-	log.Fatal(http.ListenAndServe(":5100", mux))
-	
 }

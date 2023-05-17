@@ -38,6 +38,7 @@ func WalletСreateEvent(id string, status string) {
 		Id: id,
 		Status: status,
 	}
+	println("Wallet create event function")
 	PublishEvent(event)
 }
 
