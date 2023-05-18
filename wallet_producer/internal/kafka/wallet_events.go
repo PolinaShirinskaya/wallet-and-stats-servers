@@ -31,14 +31,12 @@ type WalletTransferedEvent struct {
 	Amount	string `json:"amount"`
 }
 
-
-func WalletСreateEvent(id string, status string) {
+func WalletCreateEvent(id string, status string) {
 	event := WalletCreatedEvent{
 		Type: "Wallet_Created",
 		Id: id,
 		Status: status,
 	}
-	println("Wallet create event function")
 	PublishEvent(event)
 }
 

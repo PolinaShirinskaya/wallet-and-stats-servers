@@ -20,6 +20,8 @@ func main() {
 	server := NewWalletServer()
 	mux.HandleFunc("/wallets/", server.walletHandler)
 
+	kafka.SetupProducer()
+
 	signals := make(chan os.Signal, 1)
 	signal.Notify(signals, os.Interrupt)
 
@@ -151,7 +153,7 @@ func (ws *walletServer) createWalletHandler(w http.ResponseWriter, req *http.Req
 	wallet, err := ws.store.CreateWallet(rw.Name)
 	if err == nil {
 		renderJSON(w, ResponseWallet{wallet.Id, wallet.Name, wallet.Status})
-		kafka.WalletСreateEvent(wallet.Id, wallet.Status)
+		kafka.WalletCreateEvent(wallet.Id, wallet.Status)
 	} else {
 		w.WriteHeader(http.StatusBadRequest)
 	}

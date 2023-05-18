@@ -17,25 +17,24 @@ var (
 
 func PublishEvent(event interface{}) {
 
-	println("Publish event function")
-	producer, err := setupProducer()
+	// graceful shutdown
+	signals := make(chan os.Signal, 1)
+	signal.Notify(signals, os.Interrupt)
+
+	produceMessage(Producer, signals, event)
+}
+
+var Producer sarama.AsyncProducer
+
+func SetupProducer() {
+	config := sarama.NewConfig()
+	var err error
+	Producer, err = sarama.NewAsyncProducer(KafkaBrokers, config)
 	if err != nil {
 		panic(err)
 	} else {
 		log.Printf("Kafka __producer__ running!")
 	}
-
-	// graceful shutdown
-	signals := make(chan os.Signal, 1)
-	signal.Notify(signals, os.Interrupt)
-
-	produceMessage(producer, signals, event)
-}
-
-func setupProducer() (sarama.AsyncProducer, error) {
-	
-	config := sarama.NewConfig()
-	return sarama.NewAsyncProducer(KafkaBrokers, config)
 }
 
 func produceMessage(producer sarama.AsyncProducer, signals chan os.Signal, event interface{}) {
